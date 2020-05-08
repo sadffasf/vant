@@ -1,10 +1,10 @@
 <template>
-  <van-empty image="error" description="很抱歉~" />
+  <van-empty image="error" description="很抱歉~404" />
 </template>
 
 <script>
     export default {
-        name: "404"
+        name: "page404"
     }
 </script>
 
