@@ -2,14 +2,15 @@
   <div>
     <van-tabs v-model="active" animated>
       <van-tab v-for="item,index in list" :title="'选项 ' + index"  :key="index" >
-          <div class="box">
+          <div class="box van-hairline--surround">
             <div class="item item-left">
-              <van-image
-                round
-                width="160"
-                height="160"
-                :src="item.imgSrc"
-              />
+                <van-image  v-show="list.length>0"
+                  round
+                  width="160"
+                  height="160"
+                  :src="item.imgSrc"
+                />
+
             </div>
             <div class="item item-right">
               <h5>{{item.title}}</h5>
@@ -25,8 +26,10 @@
 </template>
 
 <script>
+  import mixinName from '../mixin/templateMixin'
     export default {
         name: "list",
+
         data(){
             return {
                 active:0,
@@ -40,19 +43,24 @@
                   this.list = res.data
               })
             }
-        }
+        },
+        mounted() {
+
+        },
+        mixins:[mixinName],
     }
 </script>
-
-<style scoped>
+<style scoped lang="scss">
   .box{
     display: flex;
+    .item-left{
+      width: 200px;
+      height: 160px;
+    }
+    .item-right{
+      flex: 1;
+    }
   }
-  .box .item-left{
-    width: 200px;
-    height: 160px;
-  }
-  .box .item-right{
-    flex: 1;
-  }
+
+
 </style>

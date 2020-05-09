@@ -45,9 +45,6 @@
         methods:{
             ...mapMutations(['SET_LOGIN_SUCCESS']),
             onSubmit(values) {
-                console.log('submit', values);
-                this.$apis.login({name:123})
-
                 if(values.username&&values.password){
                     let redirect = this.$route.query.redirect;
                     localStorage.setItem('hasLogin',1);
