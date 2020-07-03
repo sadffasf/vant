@@ -12,7 +12,7 @@ import router from './router/'
 //移动端引入vant UI组件库
 import Vant from 'vant'
 import 'vant/lib/index.css'
-import './style/flexible'//设置1rem font-size  淘宝方案。
+// import './style/flexible'//设置1rem font-size  淘宝方案。
 import '@vant/touch-emulator' //适应移动端在电脑端的点击事件。
 /*
 * 移动端结束
@@ -23,6 +23,8 @@ import '@vant/touch-emulator' //适应移动端在电脑端的点击事件。
 process.env.MOCK && require('./mock')
 import constData from './config/const'
 import * as $apis from './api/api'
+
+import '@/config/rem.js'
 
 import VueBus from 'vue-bus'   //eventBus事件总线插件;this.$bus访问bus的方法 $on、$emit、$off、$once;
 Vue.use(VueBus);

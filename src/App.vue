@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style>
-  /*@import "./style/reset.css";*/
+  @import "./style/reset.css";
 /* 引入全局重设样式、同时设置rem */
 
 </style>

@@ -9,11 +9,11 @@ const routes  = [
     path: '/',
     redirect: { name: 'login' }
   },
-  {
-    path: '/login',
-    name: 'login',
-    component:  resolve => require(['@/components/login'],resolve)   //路由异步加载（懒加载）
-  },
+  // {
+  //   path: '/login',
+  //   name: 'login',
+  //   component:  resolve => require(['@/components/login'],resolve)   //路由异步加载（懒加载）
+  // },
   {
     path: '/detail/:id',
     name: 'detail',
@@ -26,6 +26,11 @@ const routes  = [
     path: '/list',
     name: 'list',
     component: resolve => require(['@/components/list'],resolve)
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: resolve => require(['@/page/test'],resolve)
   },
   //放在最后匹配404的
   {
@@ -44,7 +49,7 @@ const router = new VueRouter({
 //全局导航守卫钩子
 router.beforeEach((to, from, next) => {
   if(to.meta.requireAuth){
-    let hasLogin = localStorage.getItem('hasLogin')
+    let hasLogin = localStorage.getItem('agentId')
     if(hasLogin){
       next()
     }else{

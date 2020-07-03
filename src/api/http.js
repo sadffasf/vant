@@ -4,6 +4,7 @@ import axios from 'axios' // 引入axios
 import store from '../store' // 引入全局状态管理
 import router from '../router' // 路由
 import { Toast } from 'vant' // 控件
+import { Notify } from 'vant';
 
 
 
@@ -19,9 +20,7 @@ import { Toast } from 'vant' // 控件
 
 
 
-
-
-
+process.env.NODE_ENV =='development' ? axios.defaults.baseURL = '/apis':'';
 // 设置请求超时时间
 axios.defaults.timeout = 10000;
 // post请求头
@@ -30,6 +29,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 // request 请求拦截器
 axios.interceptors.request.use(
   config => {
+
     // 每次发送请求之前判断是否存在token,如果存在，则统一在http请求的header都加上token,不用每次请求都手动添加
     // 即使本地存在token，也有可能token是过期的，所以在响应拦截器中要对返回状态进行判断
     const token = store.state.token;
@@ -43,8 +43,14 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   response => {
     if (response.status === 200) {
-      return Promise.resolve(response)
+      if(response.data.errorMessage==null){
+        return Promise.resolve(response)
+      }else{
+        Notify({ type: 'warning', message: response.data.errorMessage });
+        return Promise.reject(response);
+      }
     } else {
+      Notify({ type: 'danger', message: response.data.errorMessage });
       return Promise.reject(response)
     }
   },
